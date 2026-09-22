@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="480" height="480">
+  <!-- Monochrome logo variant -->
+  <path d="M240 24 L420 84 V220 C420 336 346 412 240 456 C134 412 60 336 60 220 V84 Z"
+        fill="none" stroke="#1B2A4A" stroke-width="10"/>
+  <path d="M150 196 Q195 172 240 200 Q285 172 330 196 V290 Q285 266 240 294 Q195 266 150 290 Z"
+        fill="#1B2A4A"/>
+  <line x1="240" y1="200" x2="240" y2="294" stroke="#FFFFFF" stroke-width="4"/>
+  <path d="M160 238 Q200 220 235 240 M160 258 Q200 240 235 260 M245 240 Q280 220 320 238 M245 260 Q280 240 320 258"
+        fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M240 96 Q254 120 252 140 Q246 150 240 150 Q234 150 228 140 Q226 120 240 96 Z"
+        fill="#1B2A4A"/>
+  <path d="M240 120 Q258 158 258 180 A18 18 0 0 1 222 180 Q222 158 240 120 Z" fill="#1B2A4A"/>
+  <rect x="237" y="180" width="6" height="34" fill="#1B2A4A"/>
+  <path d="M120 250 Q96 300 140 368 Q100 340 96 300 Q92 262 120 250 Z" fill="#1B2A4A"/>
+  <path d="M360 250 Q384 300 340 368 Q380 340 384 300 Q388 262 360 250 Z" fill="#1B2A4A"/>
+  <text x="240" y="432" font-family="Georgia, serif" font-size="26" font-weight="bold"
+        fill="#1B2A4A" text-anchor="middle">GA</text>
+</svg>

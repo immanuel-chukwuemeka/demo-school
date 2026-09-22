@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — {name}</title>
+  <meta name="description" content="Get in touch with {name}: visit us in Ikeja, Lagos, call, email, WhatsApp or send us a message.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="contact">
+  <header class="site-header" id="site-header"></header>
+  <section class="page-hero">
+    <img class="pbg" src="assets/images/hero/campus-hero.jpg" alt="">
+    <div class="container">
+      <span class="kicker" style="position:relative;z-index:2">Contact</span>
+      <h1>We'd Love to Hear From You</h1>
+      <div class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Contact</span></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-4 stagger" style="margin-bottom:54px">
+        <a class="card card-hover reveal" href="tel:{phoneRaw}"><div class="icon-chip"><i class="fa-solid fa-phone-volume"></i></div><h3 style="font-size:1rem">Call Us</h3><p style="color:var(--color-muted);font-size:.9rem">{phone}<br>{phone2}</p></a>
+        <a class="card card-hover reveal" href="mailto:{email}"><div class="icon-chip"><i class="fa-solid fa-envelope-open-text"></i></div><h3 style="font-size:1rem">Email Us</h3><p style="color:var(--color-muted);font-size:.9rem">{email}<br>{admissionsEmail}</p></a>
+        <a class="card card-hover reveal" href="https://wa.me/{whatsappRaw}" target="_blank" rel="noopener"><div class="icon-chip"><i class="fa-brands fa-whatsapp"></i></div><h3 style="font-size:1rem">WhatsApp</h3><p style="color:var(--color-muted);font-size:.9rem">{whatsapp}<br>Mon–Fri, 8am–4pm</p></a>
+        <a class="card card-hover reveal" href="#map"><div class="icon-chip"><i class="fa-solid fa-location-dot"></i></div><h3 style="font-size:1rem">Visit Us</h3><p style="color:var(--color-muted);font-size:.9rem">{address}</p></a>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px">
+        <div class="reveal-left">
+          <span class="kicker">Send a Message</span>
+          <h2 style="font-size:1.9rem;margin-bottom:20px">Enquiry Form</h2>
+          <form id="contactForm" class="form-grid">
+            <div class="form-field"><label for="cname">Full Name</label><input id="cname" type="text" required placeholder="Your full name"></div>
+            <div class="form-field"><label for="cphone">Phone</label><input id="cphone" type="tel" required placeholder="+234 800 000 0000"></div>
+            <div class="form-field"><label for="cemail">Email</label><input id="cemail" type="email" placeholder="you@example.com"></div>
+            <div class="form-field"><label for="crole">I am a…</label>
+              <select id="crole"><option>Prospective Parent</option><option>Current Parent</option><option>Partner</option><option>Other</option></select>
+            </div>
+            <div class="form-field" style="grid-column:1/-1"><label for="cmsg">Message</label><textarea id="cmsg" required placeholder="How can we help?"></textarea></div>
+            <div class="form-field" style="grid-column:1/-1"><button class="btn btn-gold btn-block" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button></div>
+          </form>
+        </div>
+        <div class="reveal-right">
+          <span class="kicker">Find Us</span>
+          <h2 style="font-size:1.9rem;margin-bottom:20px">Campus Location</h2>
+          <div class="contact-map" id="map" style="min-height:440px">
+            <div class="text-center" style="padding:20px"><i class="fa-solid fa-map-location-dot"></i><p style="color:var(--color-muted)"><b style="color:var(--color-primary-dark)">{name}</b><br>{address}<br>Lagos, Nigeria</p></div>
+          </div>
+          <div class="card mt-3" style="background:var(--color-accent-soft);border-color:var(--color-accent)">
+            <div class="flex" style="gap:14px"><i class="fa-solid fa-clock" style="color:var(--color-accent);font-size:1.5rem"></i><div><b>Office Hours</b><p style="color:var(--color-muted);font-size:.9rem">Monday – Friday: 8:00am – 4:00pm<br>Saturday: 9:00am – 12:00pm</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer" id="site-footer"></footer>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/pages/contact.js"></script>
+</body>
+</html>

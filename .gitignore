@@ -1,0 +1,19 @@
+# Environment variables
+.env
+.env.server
+
+# Firebase service account - NEVER commit
+server/serviceAccountKey.json
+school-demo-*.json
+*admin*.json
+
+# Node
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

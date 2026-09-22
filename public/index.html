@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greenwood Academy — Premium Nigerian Private School | Creche to Secondary</title>
+  <meta name="description" content="Greenwood Academy is a premium Nigerian private school offering early years, primary, and secondary education grounded in excellence, discipline, and character.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="home">
+  <header class="site-header" id="site-header"></header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="top">
+    <div class="hero-bg"><img src="assets/images/hero/campus-hero.jpg" alt="Greenwood Academy campus" fetchpriority="high"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-pattern" data-depth="6"></div>
+    <div class="hero-float a" data-depth="14"></div>
+    <div class="hero-float b" data-depth="20"></div>
+    <div class="container" style="position:relative;z-index:4">
+      <div class="grid grid-2" style="align-items:center;gap:56px">
+        <div class="hero-content">
+          <span class="hero-eyebrow"><i class="fa-solid fa-mortar-board"></i> {name} — Est. 2008</span>
+          <h1 class="hero-title">Where Excellence Meets <span class="gold">Character</span>.</h1>
+          <p class="hero-sub">A premium private school nurturing confident, disciplined and academically excellent learners from Creche through Secondary school in Lagos, Nigeria.</p>
+          <div class="hero-cta">
+            <a href="admissions.html" class="btn btn-gold magnetic"><i class="fa-solid fa-paper-plane"></i> Apply for Admission</a>
+            <a href="about.html" class="btn btn-ghost">Discover {name}</a>
+          </div>
+        </div>
+        <div data-requirement-widget>
+          <div class="hero-widget">
+            <h3><i class="fa-solid fa-magnifying-glass-dollar"></i> Check Admission Requirements</h3>
+            <p>Pick your academic level and class to see the complete fee breakdown.</p>
+            <div class="field">
+              <label for="lvl">Academic Level</label>
+              <select id="lvl" data-field="level">
+                <option value="creche">Creche</option>
+                <option value="nursery">Nursery</option>
+                <option value="primary">Primary</option>
+                <option value="secondary">Secondary</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cls">Class</label>
+              <select id="cls" data-field="class"></select>
+            </div>
+            <button class="btn btn-gold btn-block" data-action="view"><i class="fa-solid fa-magnifying-glass"></i> View Requirements</button>
+            <div class="fee-result"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll"><span class="mouse"></span> Scroll</div>
+  </section>
+
+  <!-- ================= STRIP ================= -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span><i class="fa-solid fa-star"></i> WAEC & NECO Excellence</span>
+      <span><i class="fa-solid fa-flask"></i> Modern Science Laboratories</span>
+      <span><i class="fa-solid fa-computer"></i> Hands-on ICT & Robotics</span>
+      <span><i class="fa-solid fa-shield-halved"></i> Safe, Disciplined Environment</span>
+      <span><i class="fa-solid fa-people-group"></i> Small Class Sizes</span>
+      <span><i class="fa-solid fa-star"></i> WAEC & NECO Excellence</span>
+      <span><i class="fa-solid fa-flask"></i> Modern Science Laboratories</span>
+      <span><i class="fa-solid fa-computer"></i> Hands-on ICT & Robotics</span>
+      <span><i class="fa-solid fa-shield-halved"></i> Safe, Disciplined Environment</span>
+      <span><i class="fa-solid fa-people-group"></i> Small Class Sizes</span>
+    </div>
+  </div>
+
+  <!-- ================= WELCOME ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split-media reveal-left">
+          <div class="frame-accent tl"></div>
+          <div class="media-frame"><img src="assets/images/hero/morning-assembly.jpg" alt="Students at morning assembly"></div>
+          <div class="badge-float"><b data-count="92">0</b>% of graduates enter top secondary schools</div>
+        </div>
+        <div class="reveal-right">
+          <span class="kicker">Welcome to {name}</span>
+          <h2 style="font-size:2.2rem;margin-bottom:16px">A Foundation of Faith, Focus &amp; Academic Rigour</h2>
+          <p style="color:var(--color-muted);margin-bottom:18px">Since 2008, {name} has provided a serene, secure and stimulating environment where every child is known by name and nurtured as a whole person — academically, morally and socially. We fuse a robust British-Nigerian curriculum with modern digital learning.</p>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-circle-check"></i><div><b>Curriculum</b> — Nigerian/British blended curriculum, WAEC, NECO &amp; BTEC-aligned.</div></li>
+            <li><i class="fa-solid fa-circle-check"></i><div><b>Character</b> — Values-based boarding of discipline, respect and service.</div></li>
+            <li><i class="fa-solid fa-circle-check"></i><div><b>Technology</b> — Smart classrooms, robotics, and safe digital citizenship.</div></li>
+          </ul>
+          <a href="about.html" class="btn btn-navy mt-3">More About Us <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ACADEMIC LEVELS ================= -->
+  <section class="section section-tint">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="kicker">Our Schools</span>
+        <h2>One School. Four Stages of Excellence.</h2>
+        <p>From the first steps of early years to university-readiness, each stage is purpose-designed.</p>
+      </div>
+      <div class="grid grid-4 stagger" style="--_delay:.08s">
+        <article class="level-card reveal-zoom">
+          <img src="assets/images/facilities/classroom-primary.jpg" alt="Creche classroom">
+          <span class="lc-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+          <div class="lc-body">
+            <h3>Creche (1–2 yrs)</h3>
+            <p>Safe, loving early stimulation with qualified caregivers.</p>
+            <a class="lc-link" href="creche.html">Explore Creche <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+        <article class="level-card reveal-zoom">
+          <img src="assets/images/hero/morning-assembly.jpg" alt="Nursery children">
+          <span class="lc-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+          <div class="lc-body">
+            <h3>Nursery (2–5 yrs)</h3>
+            <p>Play-based learning that builds literacy, numeracy &amp; confidence.</p>
+            <a class="lc-link" href="nursery.html">Explore Nursery <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+        <article class="level-card reveal-zoom">
+          <img src="assets/images/facilities/classroom-secondary.jpg" alt="Primary pupils">
+          <span class="lc-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+          <div class="lc-body">
+            <h3>Primary (5–11 yrs)</h3>
+            <p>Cambridge-aligned core subjects, sports and creative arts.</p>
+            <a class="lc-link" href="primary.html">Explore Primary <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+        <article class="level-card reveal-zoom">
+          <img src="assets/images/facilities/science-lab.jpg" alt="Secondary students in lab">
+          <span class="lc-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+          <div class="lc-body">
+            <h3>Secondary (11–16+ yrs)</h3>
+            <p>JSS &amp; SSS: WAEC, NECO &amp; JAMB preparation plus leadership.</p>
+            <a class="lc-link" href="secondary.html">Explore Secondary <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      <div class="text-center mt-5 reveal">
+        <a href="admissions.html" class="btn btn-gold"><i class="fa-solid fa-file-signature"></i> Begin Admission Process</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATS ================= -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-head center reveal" style="margin-inline:auto">
+        <span class="kicker">Our Numbers</span>
+        <h2>{name} in Figures</h2>
+      </div>
+      <div class="stat-grid stagger">
+        <div class="stat reveal" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+          <div class="stat-ic"><i class="fa-solid fa-users"></i></div>
+          <div class="num"><span data-count="210">0</span>+</div>
+          <p>Happy Students</p>
+        </div>
+        <div class="stat reveal" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+          <div class="stat-ic"><i class="fa-solid fa-user-tie"></i></div>
+          <div class="num"><span data-count="30">0</span>+</div>
+          <p>Dedicated Staff</p>
+        </div>
+        <div class="stat reveal" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+          <div class="stat-ic"><i class="fa-solid fa-award"></i></div>
+          <div class="num"><span data-count="98">0</span>%</div>
+          <p>WAEC Success Rate</p>
+        </div>
+        <div class="stat reveal" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+          <div class="stat-ic"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="num"><span data-count="17">0</span>+</div>
+          <p>Years of Excellence</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY CHOOSE / FACILITIES ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="split" style="margin-bottom:60px">
+        <div class="reveal-left">
+          <span class="kicker">Why Choose {name}</span>
+          <h2 style="font-size:2.1rem;margin-bottom:16px">Every Detail Designed Around Your Child's Growth</h2>
+          <p style="color:var(--color-muted);margin-bottom:22px">Our facilities, teaching methods, and pastoral care work together to produce confident, well-rounded learners.</p>
+          <div class="grid grid-2" style="gap:16px">
+            <div class="card card-hover reveal"><div class="icon-chip"><i class="fa-solid fa-computer"></i></div><h3 style="font-size:1.05rem">Smart ICT Labs</h3><p style="color:var(--color-muted);font-size:.9rem">Coding, robotics and safe digital learning from Primary.</p></div>
+            <div class="card card-hover reveal"><div class="icon-chip"><i class="fa-solid fa-flask"></i></div><h3 style="font-size:1.05rem">Science Laboratories</h3><p style="color:var(--color-muted);font-size:.9rem">Fully equipped Physics, Chemistry and Biology labs.</p></div>
+            <div class="card card-hover reveal"><div class="icon-chip"><i class="fa-solid fa-book-open-reader"></i></div><h3 style="font-size:1.05rem">Rich Library</h3><p style="color:var(--color-muted);font-size:.9rem">Over 12,000 volumes plus a digital reading corner.</p></div>
+            <div class="card card-hover reveal"><div class="icon-chip"><i class="fa-solid fa-trophy"></i></div><h3 style="font-size:1.05rem">Sports &amp; Clubs</h3><p style="color:var(--color-muted);font-size:.9rem">Four school houses, athletics, music, debate and more.</p></div>
+          </div>
+        </div>
+        <div class="split-media reveal-right">
+          <div class="frame-accent br"></div>
+          <div class="media-frame"><img src="assets/images/facilities/computer-lab.jpg" alt="Students in the ICT laboratory"></div>
+          <div class="badge-float"><b data-count="12" data-dur="1000">0</b>K+ books &amp; digital resources</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRINCIPAL ================= -->
+  <section class="section section-tint">
+    <div class="container">
+      <div class="split">
+        <div class="split-media reveal-left">
+          <div class="media-frame"><img src="assets/images/hero/principal.jpg" alt="Mrs. Ngozi Adeyemi, Principal of Greenwood Academy"></div>
+          <div class="badge-float" style="right:auto;left:26px;border-right:4px solid var(--color-accent);border-left:none"><b>Mrs. Ngozi Adeyemi</b>Principal, {name}</div>
+        </div>
+        <div class="reveal-right">
+          <span class="kicker">Principal's Welcome</span>
+          <h2 style="font-size:2rem;margin-bottom:18px">"We Raise Children Who Think, Serve and Lead."</h2>
+          <p style="color:var(--color-muted);margin-bottom:16px">Welcome to {name}. Every morning we promise our parents one thing — that their child will leave here stronger, kinder and smarter than yesterday. Our teachers combine warmth with rigour, our campus is safe, and our results speak for themselves.</p>
+          <p style="color:var(--color-muted)">I invite you to tour our campus, meet our team, and see why families entrust us with their most precious treasure.</p>
+          <div class="flex mt-4">
+            <a href="about.html" class="btn btn-navy">Meet the Team <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-soft" style="background:var(--color-cloud);border:2px solid var(--color-border);color:var(--color-primary-dark)">Book a Visit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EVENTS ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head flex" style="justify-content:space-between;align-items:flex-end;max-width:none">
+        <div><span class="kicker">Upcoming Events</span><h2 style="font-size:2rem">What's Happening at {name}</h2></div>
+        <a href="activities.html" class="btn btn-soft" style="background:var(--color-cloud);border:2px solid var(--color-border);color:var(--color-primary-dark)">All Events <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div id="homeEvents" class="grid grid-3 stagger"><div class="loader" style="grid-column:1/-1"></div></div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-head center reveal" style="margin-inline:auto">
+        <span class="kicker">Parent Testimonials</span>
+        <h2>Trusted by Families Across Lagos</h2>
+      </div>
+      <div class="grid grid-3 stagger">
+        <blockquote class="quote-card reveal" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+          <i class="fa-solid fa-quote-left"></i>
+          <p>"Our daughter joined in Nursery 2 and now heads the secondary debate club. The discipline and academic support here are unmatched."</p>
+          <footer class="quote-who"><img src="assets/images/gallery/gallery-1.jpg" alt="Parent"><span><b style="color:#fff">Mrs. Adaeze Okonkwo</b><span>Parent · Primary &amp; Secondary</span></span></footer>
+        </blockquote>
+        <blockquote class="quote-card reveal" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+          <i class="fa-solid fa-quote-left"></i>
+          <p>"The teachers know every child by name. My son went from shy to leading his class project — the transformation has been wonderful."</p>
+          <footer class="quote-who"><img src="assets/images/gallery/gallery-2.jpg" alt="Parent"><span><b style="color:#fff">Mr. Tunde Balogun</b><span>Parent · Primary 4</span></span></footer>
+        </blockquote>
+        <blockquote class="quote-card reveal" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+          <i class="fa-solid fa-quote-left"></i>
+          <p>"Excellent communication with parents, transparent results, and a campus my children genuinely love. Worth every kobo."</p>
+          <footer class="quote-who"><img src="assets/images/gallery/gallery-3.jpg" alt="Parent"><span><b style="color:#fff">Dr. Halima Yusuf</b><span>Parent · Nursery 1</span></span></footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NEWS ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head flex" style="justify-content:space-between;align-items:flex-end;max-width:none">
+        <div><span class="kicker">News &amp; Blog</span><h2 style="font-size:2rem">Latest from campus</h2></div>
+        <a href="news.html" class="btn btn-soft" style="background:var(--color-cloud);border:2px solid var(--color-border);color:var(--color-primary-dark)">All News <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div id="homeNews" class="grid grid-3 stagger"><div class="loader" style="grid-column:1/-1"></div></div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal-zoom">
+        <h2>Ready to give your child the {name} advantage?</h2>
+        <p>Admissions for the {session} session are open across all levels. Spaces are limited and allocated on a first-come, first-served basis.</p>
+        <div class="flex" style="justify-content:center">
+          <a href="admissions.html" class="btn btn-gold magnetic"><i class="fa-solid fa-paper-plane"></i> Apply Now</a>
+          <a href="contact.html" class="btn btn-ghost"><i class="fa-solid fa-headset"></i> Talk to Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/pages/index.js"></script>
+</body>
+</html>

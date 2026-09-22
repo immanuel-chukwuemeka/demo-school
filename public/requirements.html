@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admission Requirements &amp; Fees at {name}</title>
+  <meta name="description" content="View the complete breakdown of admission requirements and fees per class at {name} for the {session} session.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="admissions">
+  <header class="site-header" id="site-header"></header>
+  <section class="page-hero">
+    <img class="pbg" src="assets/images/facilities/library.jpg" alt="">
+    <div class="container">
+      <span class="kicker" style="position:relative;z-index:2">Requirements</span>
+      <h1>Admission Requirements &amp; School Fees</h1>
+      <div class="crumbs"><a href="index.html">Home</a><a href="admissions.html">Admissions</a><span class="sep">/</span><span>Requirements</span></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:920px">
+      <div class="section-head center reveal" style="margin-inline:auto">
+        <span class="kicker">Requirement Checker</span>
+        <h2>Select Your Child's Class</h2>
+        <p>Get an instant, complete breakdown of every fee payable for the {session} session.</p>
+      </div>
+      <div class="card reveal" style="max-width:640px;margin-inline:auto" data-requirement-widget>
+        <div class="field"><label for="lvl">Academic Level</label>
+          <select id="lvl" data-field="level"><option value="creche">Creche</option><option value="nursery">Nursery</option><option value="primary">Primary</option><option value="secondary">Secondary</option></select>
+        </div>
+        <div class="field"><label for="cls">Class</label><select id="cls" data-field="class"></select></div>
+        <button class="btn btn-gold btn-block" data-action="view"><i class="fa-solid fa-magnifying-glass"></i> View Requirements</button>
+        <div class="fee-result"></div>
+      </div>
+      <p class="text-center mt-4" style="color:var(--color-muted);font-size:.9rem"><i class="fa-solid fa-circle-info" style="color:var(--color-accent)"></i> Fees cover the term; transport and boarding are optional. All amounts verified by the Bursar. The school reviews fees each session.</p>
+    </div>
+  </section>
+  <section class="section section-tint">
+    <div class="container">
+      <div class="section-head center reveal" style="margin-inline:auto"><span class="kicker">What's Included</span><h2>Understanding the Fee Items</h2></div>
+      <div class="grid grid-3 stagger">
+        <div class="card reveal"><div class="icon-chip"><i class="fa-solid fa-graduation-cap"></i></div><h3 style="font-size:1.02rem">Tuition &amp; Learning Materials</h3><p style="color:var(--color-muted);font-size:.9rem">Instruction, workbooks, continuous assessment and basic learning resources.</p></div>
+        <div class="card reveal"><div class="icon-chip"><i class="fa-solid fa-tshirt"></i></div><h3 style="font-size:1.02rem">Uniform &amp; PTA</h3><p style="color:var(--color-muted);font-size:.9rem">School uniforms per level, PTA development support and community projects.</p></div>
+        <div class="card reveal"><div class="icon-chip"><i class="fa-solid fa-laptop"></i></div><h3 style="font-size:1.02rem">ICT &amp; Sports</h3><p style="color:var(--color-muted);font-size:.9rem">Computer lessons, digital resources, PE, swimming and house competitions.</p></div>
+      </div>
+      <div class="text-center mt-5 reveal"><a href="prospectus.html" class="btn btn-navy">See Class Prospectus &amp; Booklists <i class="fa-solid fa-arrow-right"></i></a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal-zoom">
+        <h2>Questions about fees or payment plans?</h2>
+        <p>Our bursary team offers termly and monthly plans for qualifying families.</p>
+        <div class="flex" style="justify-content:center"><a href="contact.html" class="btn btn-gold magnetic"><i class="fa-solid fa-headset"></i> Talk to the Bursar</a><a href="admissions.html" class="btn btn-ghost">Admission Steps</a></div>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer" id="site-footer"></footer>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/pages/requirements-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- HELPER FUNCTIONS ----------
+    function signedIn() { return request.auth != null; }
+    function isAdmin()   { return signedIn() && request.auth.token.role == 'admin'; }
+    function isStaff()   { return signedIn() && request.auth.token.role == 'staff'; }
+    function isStudent() { return signedIn() && request.auth.token.role == 'student'; }
+
+    // ---------- PUBLIC READ / ADMIN WRITE ----------
+    match /settings/{doc}        { allow read: if true;   allow write: if isAdmin(); }
+    match /requirements/{cid}    { allow read: if true;   allow write: if isAdmin(); }
+    match /prospectus/{pid}      { allow read: if true;   allow write: if isAdmin(); }
+    match /fees/{cid}            { allow read: if true;   allow write: if isAdmin(); }
+    match /classes/{cid}         { allow read: if true;   allow write: if isAdmin(); }
+    match /subjects/{sid}        { allow read: if true;   allow write: if isAdmin(); }
+    match /sessions/{ses}        { allow read: if true;   allow write: if isAdmin(); }
+    match /terms/{tid}           { allow read: if true;   allow write: if isAdmin(); }
+    match /grading/{gid}         { allow read: if true;   allow write: if isAdmin(); }
+    match /news/{id}             { allow read: if true;   allow write: if isAdmin(); }
+    match /blogPosts/{id}        { allow read: if true;   allow write: if isAdmin(); }
+    match /events/{id}           { allow read: if true;   allow write: if isAdmin(); }
+    match /gallery/{id}          { allow read: if true;   allow write: if isAdmin(); }
+    match /announcements/{id}    { allow read: if true;   allow write: if isAdmin(); }
+    match /schools/{id}          { allow read: if true;   allow write: if isAdmin(); }
+
+    // Public enquirers may create contact records; admin manages them.
+    match /contacts/{id} {
+      allow create: if request.resource.data.name is string &&
+                    request.resource.data.phone is string &&
+                    request.resource.data.message is string;
+      allow read: if isAdmin();
+      allow delete, update: if isAdmin();
+    }
+
+    // ---------- USERS ----------
+    match /users/{uid} {
+      allow read: if isAdmin() || request.auth.uid == uid;
+      allow write: if isAdmin() || request.auth.uid == uid;
+    }
+
+    // ---------- STUDENTS ----------
+    match /students/{id} {
+      allow read: if isAdmin() || isStaff() || (isStudent() && resource.data.userId == request.auth.uid);
+      allow write: if isAdmin();
+    }
+
+    // ---------- STAFF ----------
+    match /staff/{id} {
+      allow read: if isAdmin() || isStaff();
+      allow write: if isAdmin();
+    }
+
+    // ---------- TEACHER ASSIGNMENTS (many-to-many) ----------
+    match /teacherAssignments/{id} {
+      allow read: if isAdmin() || isStaff();
+      allow write: if isAdmin();
+    }
+
+    // ---------- RESULTS ----------
+    // Teachers write raw scores into marksheets; admin locks/generates.
+    match /results/{sessionKey}/{classId}/{studentId} {
+      allow read: if isAdmin() || isStaff()
+                  || (isStudent() && resource.data.uid == request.auth.uid)
+                  || resource.data.published == true;   // demo: published results viewable
+      allow write: if isAdmin();
+    }
+
+    // Raw continuous-assessment scoresheet. Stored as top-level docs:
+    //  scores/{sessionKey}_{classId}_{studentId}
+    match /scores/{doc} {
+      allow read: if isAdmin() || isStaff();
+      allow write: if isAdmin() || isStaff();
+    }
+
+    // ---------- SCRATCH CARDS ----------
+    // Document ID == the 10-digit PIN. Public read of a single PIN is
+    // allowed so parents can validate; attempt counters may be bumped.
+    match /scratchPins/{pin} {
+      allow read: if true;
+      allow update: if isAdmin() || !signedIn()
+                    && request.resource.data.diff(resource.data).affectedKeys()
+                       .hasOnly([
+                          'firstTermAttempts',
+                          'secondTermAttempts',
+                          'thirdTermAttempts'
+                       ]);
+      allow create, delete: if isAdmin();
+    }
+
+    // ---------- AUDIT LOG (append-only, admin managed) ----------
+    match /auditLogs/{id} {
+      allow create: if signedIn();
+      allow read: if isAdmin() || isStaff();
+    }
+
+    // ---------- DOWNLOADS / DEMO ASSETS ----------
+    match /assets/{id} { allow read: if true; allow write: if isAdmin(); }
+  }
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <path d="M32 3 L56 11 V29 C56 45 44 55 32 61 C20 55 8 45 8 29 V11 Z" fill="#0D1B2A" stroke="#C9962A" stroke-width="3"/>
+  <path d="M20 25 Q26 21 32 25 Q38 21 44 25 V40 Q38 36 32 40 Q26 36 20 40 Z" fill="#FFFFFF" stroke="#C9962A" stroke-width="1.5"/>
+  <line x1="32" y1="25" x2="32" y2="40" stroke="#C9962A" stroke-width="1.5"/>
+  <path d="M32 12 Q40 20 40 27 A8 8 0 0 1 24 27 Q24 20 32 12 Z" fill="#F5C542"/>
+  <text x="32" y="55" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#F5C542"
+        text-anchor="middle">GA</text>
+</svg>

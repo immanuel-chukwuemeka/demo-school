@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Result — {name} Secondary School Portal</title>
+  <meta name="description" content="Check your child's secondary school result using the admission number and scratch card PIN from {name}.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="admissions">
+  <header class="site-header" id="site-header"></header>
+  <section class="page-hero">
+    <img class="pbg" src="assets/images/facilities/classroom-secondary.jpg" alt="">
+    <div class="container">
+      <span class="kicker" style="position:relative;z-index:2">Portal</span>
+      <h1>Secondary School Result Checker</h1>
+      <div class="crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Check Result</span></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:1240px">
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:36px;align-items:start">
+        <aside class="reveal-left" style="position:sticky;top:96px">
+          <div class="card" style="border-top:4px solid var(--color-accent)">
+            <span class="kicker">Result Checker</span>
+            <h3 style="font-size:1.3rem;margin-bottom:6px">Enter Your Details</h3>
+            <p style="color:var(--color-muted);font-size:.88rem;margin-bottom:20px">Works for <b style="color:var(--color-primary-dark)">Secondary only</b> (JSS1–SSS3). One scratch card covers all three terms — each term allows up to 3 attempts.</p>
+            <div class="field"><label for="admission">Admission Number</label>
+              <input id="admission" type="text" required placeholder="e.g. GA/2026/0123" autocomplete="off">
+            </div>
+            <div class="field"><label for="pin">Scratch Card PIN (10 digits)</label>
+              <input id="pin" type="text" inputmode="numeric" required maxlength="10" placeholder="e.g. 4839201756" autocomplete="off" style="letter-spacing:.12em;font-weight:700">
+            </div>
+            <div class="field"><label for="rSession">Session</label>
+              <select id="rSession"></select>
+            </div>
+            <div class="field"><label for="rTerm">Term</label>
+              <select id="rTerm"><option>First</option><option>Second</option><option>Third</option></select>
+            </div>
+            <button class="btn btn-gold btn-block" id="checkBtn"><i class="fa-solid fa-file-circle-check"></i> Check Result</button>
+            <div id="checkMsg" style="margin-top:14px"></div>
+          </div>
+          <div class="card mt-3" style="background:var(--color-accent-soft);border-color:var(--color-accent)">
+            <b style="color:var(--color-primary-dark)"><i class="fa-solid fa-lightbulb"></i> How it works</b>
+            <p style="color:var(--color-muted);font-size:.85rem;margin-top:8px">Scratch off the PIN on your child's result card. Each PIN is unique to one student. If 3 attempts are exceeded in a term, contact the school office to reset.</p>
+          </div>
+          <div class="card mt-3">
+            <b style="color:var(--color-primary-dark)"><i class="fa-solid fa-user-graduate"></i> Students &amp; Staff?</b>
+            <p style="color:var(--color-muted);font-size:.85rem;margin-top:8px">Signed-in students can see results in their dashboard. <a href="login.html" style="color:var(--color-accent-dark);font-weight:700">Login here</a>.</p>
+          </div>
+        </aside>
+
+        <main id="resultArea" class="reveal-right">
+          <div class="empty-state" style="padding-top:80px"><i class="fa-regular fa-file-lines"></i>
+            <h3 style="color:var(--color-primary-dark);margin:10px 0 6px">Your result will appear here</h3>
+            <p>Enter the admission number and PIN above, then press Check Result.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer" id="site-footer"></footer>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/pages/check-result.js"></script>
+</body>
+</html>

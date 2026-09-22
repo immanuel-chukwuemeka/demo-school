@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="480" height="480">
+  <!-- White logo variant for dark/navy backgrounds -->
+  <path d="M240 24 L420 84 V220 C420 336 346 412 240 456 C134 412 60 336 60 220 V84 Z"
+        fill="none" stroke="#FFFFFF" stroke-width="10"/>
+  <path d="M240 52 L392 104 V220 C392 318 328 390 240 428 C152 390 88 318 88 220 V104 Z"
+        fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.55"/>
+  <path d="M150 196 Q195 172 240 200 Q285 172 330 196 V290 Q285 266 240 294 Q195 266 150 290 Z"
+        fill="#FFFFFF"/>
+  <line x1="240" y1="200" x2="240" y2="294" stroke="#C9962A" stroke-width="4"/>
+  <path d="M160 238 Q200 220 235 240 M160 258 Q200 240 235 260 M245 240 Q280 220 320 238 M245 260 Q280 240 320 258"
+        fill="none" stroke="#1B2A4A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M240 96 Q254 120 252 140 Q246 150 240 150 Q234 150 228 140 Q226 120 240 96 Z"
+        fill="#F5C542"/>
+  <path d="M240 120 Q246 134 245 142 Q242 148 240 148 Q235 148 233 138 Q233 130 240 120 Z"
+        fill="#FFF8E1"/>
+  <path d="M240 120 Q258 158 258 180 A18 18 0 0 1 222 180 Q222 158 240 120 Z" fill="#F5C542"/>
+  <rect x="237" y="180" width="6" height="34" fill="#F5C542"/>
+  <path d="M232 214 Q240 236 248 214 Q240 222 232 214 Z" fill="#C9962A"/>
+  <path d="M120 250 Q96 300 140 368 Q100 340 96 300 Q92 262 120 250 Z" fill="#F5C542"/>
+  <path d="M110 250 Q90 290 120 340 M122 268 Q104 306 132 352 M132 288 Q116 320 142 358"
+        fill="none" stroke="#F5C542" stroke-width="4"/>
+  <path d="M360 250 Q384 300 340 368 Q380 340 384 300 Q388 262 360 250 Z" fill="#F5C542"/>
+  <path d="M370 250 Q390 290 360 340 M358 268 Q376 306 348 352 M348 288 Q364 320 338 358"
+        fill="none" stroke="#F5C542" stroke-width="4"/>
+  <path d="M240 66 V48 M190 78 L168 66 M290 78 L312 66" stroke="#F5C542" stroke-width="6" stroke-linecap="round"/>
+  <path d="M150 408 Q240 432 330 408 L322 436 Q240 458 158 436 Z" fill="#F5C542"/>
+  <text x="240" y="432" font-family="Georgia, serif" font-size="26" font-weight="bold"
+        fill="#0D1B2A" text-anchor="middle">GA</text>
+  <path d="M96 400 Q240 376 384 400 L366 440 Q240 418 114 440 Z" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+  <text x="240" y="426" font-family="Georgia, serif" font-size="20" font-style="italic" fill="#FFFFFF"
+        text-anchor="middle">Knowledge · Character · Excellence</text>
+</svg>

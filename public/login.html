@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Login — Greenwood Academy</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="login-body" data-page="login" style="background:var(--color-white)">
+  <div class="login-visual">
+    <img src="assets/images/hero/campus-hero.jpg" alt="">
+    <div class="lv-content">
+      <a class="brand" href="index.html" style="display:inline-flex;align-items:center;gap:12px;margin-bottom:30px">
+        <img src="assets/logo/logo-white.svg" alt="" style="height:60px">
+        <span class="brand-name" style="color:#fff">Greenwood Academy<br><small style="color:var(--color-accent)">Knowledge · Character · Excellence</small></span>
+      </a>
+      <h2>Your school portal,<br>one sign-in.</h2>
+      <p>Admins run the school, staff enter results, and students track their progress. Parents check results with scratch cards.</p>
+      <a href="index.html" class="btn btn-ghost btn-sm mt-3" style="width:max-content"><i class="fa-solid fa-arrow-left"></i> Back to Website</a>
+    </div>
+  </div>
+  <div class="login-panel">
+    <div class="login-brand"><img src="assets/logo/logo.svg" alt=""><b>Greenwood Academy<br><small style="color:var(--color-accent);font-weight:600">Portal Login</small></b></div>
+
+    <div class="role-cards" id="roleCards">
+      <button class="role-card active" data-role="admin" type="button"><i class="fa-solid fa-user-tie"></i><span>Admin</span></button>
+      <button class="role-card" data-role="staff" type="button"><i class="fa-solid fa-chalkboard-user"></i><span>Staff</span></button>
+      <button class="role-card" data-role="student" type="button"><i class="fa-solid fa-graduation-cap"></i><span>Student</span></button>
+    </div>
+
+    <div class="login-msg" id="loginMsg">Sign in with your <b id="roleName">Admin</b> credentials.</div>
+
+    <form id="loginForm" autocomplete="on">
+      <div class="form-field mb-3"><label for="email">Email Address</label>
+        <input id="email" type="email" required placeholder="you@greenwoodacademy.edu.ng" autocomplete="username">
+      </div>
+      <div class="form-field mb-3"><label for="password">Password</label>
+        <input id="password" type="password" required placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <div id="loginError" style="display:none;background:#FEE2E2;color:var(--color-danger);padding:12px 14px;border-radius:12px;font-size:.88rem;margin-bottom:14px"></div>
+      <button class="btn btn-gold btn-block" type="submit" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
+    </form>
+    <p class="text-center" style="color:var(--color-muted);font-size:.82rem;margin-top:16px">Parents don't log in — use the <a href="check-result.html" style="color:var(--color-accent-dark);font-weight:700">Result Checker</a>.</p>
+
+    <details class="card mt-3" style="padding:16px;background:var(--color-accent-soft);border-color:var(--color-accent)">
+      <summary style="cursor:pointer;font-weight:700;color:var(--color-primary-dark)"><i class="fa-solid fa-key"></i> Demo accounts (this box is removed in production)</summary>
+      <ul class="feature-list" style="margin-top:10px;font-size:.88rem">
+        <li><i class="fa-solid fa-user-tie"></i><div><b>Admin</b> — admin@greenwoodacademy.edu.ng · Admin@2026</div></li>
+        <li><i class="fa-solid fa-chalkboard-user"></i><div><b>Staff</b> — staff.principal@greenwoodacademy.edu.ng · Staff@2026</div></li>
+        <li><i class="fa-solid fa-graduation-cap"></i><div><b>Student</b> — GA20260001@greenwoodacademy.edu.ng · Student@2026</div></li>
+        <li><i class="fa-solid fa-file-circle-check"></i><div><b>Parent</b> — any student admission no. + scratch PIN via the Result Checker</div></li>
+      </ul>
+    </details>
+  </div>
+  <script type="module" src="js/pages/login.js"></script>
+</body>
+</html>
