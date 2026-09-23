@@ -1,6 +1,7 @@
 # Environment variables
 .env
-.env.server
+.env.*
+*.local
 
 # Firebase service account - NEVER commit
 server/serviceAccountKey.json
