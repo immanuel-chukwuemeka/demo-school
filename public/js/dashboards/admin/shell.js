@@ -22,6 +22,18 @@ export const MODULES = [
   { key: "settings", label: "Settings", icon: "fa-gears" }
 ];
 
+function openDrawer() {
+  document.getElementById("dashSide")?.classList.add("open");
+  document.getElementById("sideBackdrop")?.classList.add("show");
+  document.getElementById("menuBtn")?.classList.add("active");
+}
+
+function closeDrawer() {
+  document.getElementById("dashSide")?.classList.remove("open");
+  document.getElementById("sideBackdrop")?.classList.remove("show");
+  document.getElementById("menuBtn")?.classList.remove("active");
+}
+
 export function bootShell(views) {
   guardPage("admin", async (user) => {
     const s = await loadSettings(true);
@@ -32,12 +44,14 @@ export function bootShell(views) {
     document.getElementById("logoutBtn").addEventListener("click", () => logout());
 
     const menuBtn = document.getElementById("menuBtn");
-    const side = document.getElementById("dashSide");
     const backdrop = document.getElementById("sideBackdrop");
-    menuBtn.addEventListener("click", () => { side.classList.add("open"); backdrop.classList.add("show"); });
-    backdrop.addEventListener("click", () => { side.classList.remove("open"); backdrop.classList.remove("show"); });
+    const sideClose = document.getElementById("sideClose");
+    menuBtn.onclick = () => { document.getElementById("dashSide").classList.contains("open") ? closeDrawer() : openDrawer(); };
+    backdrop.onclick = () => closeDrawer();
+    if (sideClose) sideClose.onclick = () => closeDrawer();
 
     const route = () => {
+      closeDrawer();
       const key = (location.hash.replace("#", "") || "dashboard").trim();
       setActive(key);
       views[key] ? views[key]() : (location.hash = "#dashboard");
@@ -75,7 +89,7 @@ function renderSidebar(views) {
       return `<button class="side-link" data-module="${k}" type="button"><i class="fa-solid ${m.icon}"></i> ${m.label}</button>`;
     }).join("")}`).join("");
   document.querySelectorAll("[data-module]").forEach((btn) => {
-    btn.addEventListener("click", () => navigate(btn.dataset.module));
+    btn.addEventListener("click", () => { navigate(btn.dataset.module); closeDrawer(); });
   });
   const search = document.getElementById("globalSearch");
   if (search) search.addEventListener("input", (e) => {

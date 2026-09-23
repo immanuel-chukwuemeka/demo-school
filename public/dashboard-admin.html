@@ -19,13 +19,14 @@
   <div id="appRoot" class="dash-shell hidden">
     <aside class="dash-side" id="dashSide">
       <a class="brand" href="index.html" aria-label="Home"><img src="assets/logo/logo-white.svg" alt=""><span class="brand-name">Greenwood Admin<br><small>Control Room</small></span></a>
+      <button class="side-close" id="sideClose" type="button" aria-label="Close menu"><span class="burger active"></span></button>
       <nav id="sideNav" aria-label="Admin menu"><!-- injected --></nav>
       <div class="side-foot"><button class="side-link" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></div>
     </aside>
     <div class="side-backdrop" id="sideBackdrop"></div>
     <main class="dash-main" id="dashMain">
       <div class="dash-top">
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span class="burger"></span></button>
         <div class="dash-search search-input"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="globalSearch" placeholder="Search students, staff, classes…"></div>
         <div class="dash-top-right">
           <button class="dbtn dbtn-soft" onclick="window.open('index.html','_blank')"><i class="fa-solid fa-globe"></i> View Site</button>

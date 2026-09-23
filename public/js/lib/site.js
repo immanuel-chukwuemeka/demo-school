@@ -6,7 +6,7 @@
 import { getData } from "./db.js";
 
 export const DEFAULT_SETTINGS = {
-  name: "Greenwood Academy",
+  name: "Greenwood Academy International",
   shortName: "GA",
   motto: "Knowledge, Character, Excellence",
   vision: "To be a centre of academic and moral excellence, raising global leaders grounded in integrity.",
@@ -53,6 +53,7 @@ export async function loadSettings(force = false) {
     if (local && !force) cached = { ...DEFAULT_SETTINGS, ...JSON.parse(local) };
     const remote = await getData("settings", "main");
     if (remote) cached = { ...DEFAULT_SETTINGS, ...remote };
+    if (!cached) cached = DEFAULT_SETTINGS;
     localStorage.setItem(KEY, JSON.stringify(cached));
   } catch {
     if (!cached) cached = DEFAULT_SETTINGS;

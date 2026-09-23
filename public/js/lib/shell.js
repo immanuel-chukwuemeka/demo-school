@@ -3,7 +3,7 @@
  * mobile nav, login dropdown and back-to-top on every public page.
  * Each page marks itself active via <body data-page="home"> etc.
  * ============================================================== */
-import { loadSettings, settingsSync } from "./site.js";
+import { settingsSync } from "./site.js";
 import { toast } from "./ui.js";
 
 export const NAV = [
@@ -87,7 +87,7 @@ function headerHTML() {
           <a href="check-result.html" style="color:var(--color-accent)"><span class="li-ic"><i class="fa-solid fa-file-circle-check"></i></span> Parent: Check Result</a>
         </div>
       </div>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu"><span class="burger"></span></button>
     </div>
   </div>`;
 }
@@ -151,7 +151,7 @@ function footerHTML() {
 }
 
 export async function mountShell() {
-  const s = await loadSettings();
+  const s = settingsSync();
   const headerHost = document.getElementById("site-header");
   const footerHost = document.getElementById("site-footer");
   if (headerHost) headerHost.innerHTML = headerHTML();
@@ -159,7 +159,7 @@ export async function mountShell() {
   finalizeShell();
 }
 
-/** Wire up interactions after HTML is injected. */
+/** Wire up interactions after HTML is injected (idempotent — safe to re-run). */
 export function finalizeShell() {
   const activeKey = document.body.dataset.page;
 
@@ -173,45 +173,50 @@ export function finalizeShell() {
 
   // Glassmorphism header on scroll
   const header = document.querySelector(".site-header");
-  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
+  const onScroll = () => header && header.classList.toggle("scrolled", window.scrollY > 40);
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Mobile menu
+  // Mobile drawer (burger morphs to X; navClose sits inside the drawer)
   const toggle = document.getElementById("navToggle");
   const nav = document.getElementById("mainNav");
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => { nav.classList.toggle("open"); document.querySelector(".nav-overlay")?.classList.toggle("show"); });
+  let overlay = document.querySelector(".nav-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.className = "nav-overlay";
+    document.body.appendChild(overlay);
   }
-  const overlay = document.createElement("div");
-  overlay.className = "nav-overlay";
-  document.body.appendChild(overlay);
-  overlay.addEventListener("click", () => { nav.classList.remove("open"); overlay.classList.remove("show"); });
-  document.querySelectorAll(".has-dropdown > .nav-link").forEach((l) => {
-    l.addEventListener("click", (e) => { if (window.innerWidth <= 1080) { e.preventDefault(); l.parentElement.classList.toggle("open"); } });
-  });
+  const setOpen = (open) => {
+    if (!nav) return;
+    nav.classList.toggle("open", open);
+    overlay.classList.toggle("show", open);
+    if (toggle) toggle.classList.toggle("active", open);
+    document.body.style.overflow = open ? "hidden" : "";
+  };
+  if (toggle) toggle.onclick = () => setOpen(!nav.classList.contains("open"));
+  overlay.onclick = () => setOpen(false);
 
-  // Mobile toggle icon swap
-  if (toggle) {
-    const ic = toggle.querySelector("i");
-    if (ic) {
-      const iv = setInterval(() => {
-        if (nav.classList.contains("open")) { ic.className = "fa-solid fa-xmark"; clearInterval(iv); }
-      }, 300);
-      nav.addEventListener("transitionend", () => {
-        ic.className = nav.classList.contains("open") ? "fa-solid fa-xmark" : "fa-solid fa-bars";
-      });
-    }
-  }
+  // Drawer links: dropdown toggles expand, real links close the drawer
+  document.querySelectorAll("#mainNav .nav-link").forEach((l) => {
+    l.onclick = (e) => {
+      if (window.innerWidth > 1080) return;
+      if (l.parentElement.classList.contains("has-dropdown")) {
+        e.preventDefault();
+        l.parentElement.classList.toggle("open");
+        return;
+      }
+      setOpen(false);
+    };
+  });
+  document.querySelectorAll("#mainNav .dropdown a").forEach((a) => {
+    a.onclick = () => { if (window.innerWidth <= 1080) setOpen(false); };
+  });
 
   // Login dropdown
   const ld = document.getElementById("loginDrop");
-  if (ld) ld.addEventListener("click", () => ld.classList.toggle("open"));
+  if (ld) ld.onclick = () => ld.classList.toggle("open");
 
   // Newsletter
   const nf = document.getElementById("newsletterForm");
-  if (nf) nf.addEventListener("submit", (e) => { e.preventDefault(); nf.reset(); toast("Thank you! You are now subscribed.", "success", "Subscribed"); });
-
-  const mobileLinks = nav ? nav.querySelectorAll(".nav-link") : [];
-  mobileLinks.forEach((l) => l.addEventListener("click", () => { if (window.innerWidth <= 1080 && !l.closest(".has-dropdown")) { nav.classList.remove("open"); overlay.classList.remove("show"); } }));
+  if (nf) nf.onsubmit = (e) => { e.preventDefault(); nf.reset(); toast("Thank you! You are now subscribed.", "success", "Subscribed"); };
 }

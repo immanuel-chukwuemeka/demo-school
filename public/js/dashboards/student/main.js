@@ -141,18 +141,31 @@ async function profileView() {
 
 const views = { overview: overviewView, results: resultsView, attendance: attendanceView, requirements: requirementsView, announcements: announcementsView, profile: profileView };
 
+function openDrawer() {
+  document.getElementById("dashSide")?.classList.add("open");
+  document.getElementById("sideBackdrop")?.classList.add("show");
+  document.getElementById("menuBtn")?.classList.add("active");
+}
+
+function closeDrawer() {
+  document.getElementById("dashSide")?.classList.remove("open");
+  document.getElementById("sideBackdrop")?.classList.remove("show");
+  document.getElementById("menuBtn")?.classList.remove("active");
+}
+
 function renderSidebar() {
   document.getElementById("sideNav").innerHTML = MODULES.map((m) => `<button class="side-link" data-module="${m.key}" type="button"><i class="fa-solid ${m.icon}"></i> ${m.label}</button>`).join("");
-  document.querySelectorAll("[data-module]").forEach((b) => b.addEventListener("click", () => { location.hash = b.dataset.module; }));
+  document.querySelectorAll("[data-module]").forEach((b) => b.addEventListener("click", () => { location.hash = b.dataset.module; closeDrawer(); }));
 }
 
 guardPage("student", async (user) => {
   document.getElementById("logoutBtn").addEventListener("click", () => logout());
   const menuBtn = document.getElementById("menuBtn");
-  const side = document.getElementById("dashSide");
   const backdrop = document.getElementById("sideBackdrop");
-  menuBtn.addEventListener("click", () => { side.classList.add("open"); backdrop.classList.add("show"); });
-  backdrop.addEventListener("click", () => { side.classList.remove("open"); backdrop.classList.remove("show"); });
+  const sideClose = document.getElementById("sideClose");
+  menuBtn.onclick = () => { document.getElementById("dashSide").classList.contains("open") ? closeDrawer() : openDrawer(); };
+  backdrop.onclick = () => closeDrawer();
+  if (sideClose) sideClose.onclick = () => closeDrawer();
   settings = await loadSettings(true);
   window.__settings = settings;
   const { uid } = await profileOf(user);
@@ -170,6 +183,7 @@ guardPage("student", async (user) => {
   document.getElementById("userAvatar").src = me.passport || "assets/logo/favicon.svg";
   renderSidebar();
   const route = () => {
+    closeDrawer();
     const key = (location.hash.replace("#", "") || "overview").trim();
     document.querySelectorAll("[data-module]").forEach((b) => b.classList.toggle("active", b.dataset.module === key));
     (views[key] || views.overview)();

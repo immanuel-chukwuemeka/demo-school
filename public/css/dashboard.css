@@ -34,10 +34,15 @@
   .dash-side.open { left: 0; }
   .side-backdrop { position: fixed; inset: 0; background: rgba(13,27,42,.5); backdrop-filter: blur(2px); z-index: 499; display: none; }
   .side-backdrop.show { display: block; }
+  .dash-side .side-close { display: grid; }
 }
 
 /* Backdrop never participates in the desktop grid layout. */
 .side-backdrop { display: none; }
+
+/* Close (X) button that rides inside the mobile drawer */
+.side-close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 11px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); color: var(--color-white); display: none; place-items: center; transition: var(--trans); }
+.side-close:hover { background: var(--color-accent); color: var(--color-primary-dark); }
 
 /* ---------- Dash main ---------- */
 .dash-main { min-width: 0; }

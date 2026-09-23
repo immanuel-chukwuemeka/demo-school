@@ -222,7 +222,25 @@ img { max-width: 100%; }
 }
 .login-menu a:hover { background: var(--color-cloud); transform: translateX(4px); }
 
-.nav-toggle { display: none; width: 46px; height: 46px; border-radius: 12px; background: var(--color-primary-dark); color: var(--color-white); font-size: 1.15rem; }
+.nav-toggle { display: none; width: 46px; height: 46px; border-radius: 12px; background: var(--color-primary-dark); color: var(--color-white); font-size: 1.15rem; position: relative; z-index: 1201; }
+.nav-toggle.active { background: var(--color-accent); color: var(--color-primary-dark); }
+
+/* Animated burger (morphs to X) — shared by the public nav + dashboard menu buttons */
+.burger {
+  display: block; width: 22px; height: 2px; border-radius: 2px;
+  background: currentColor; position: relative;
+  transition: background .25s ease;
+}
+.burger::before, .burger::after {
+  content: ''; position: absolute; left: 0; width: 22px; height: 2px;
+  border-radius: 2px; background: currentColor;
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.burger::before { top: -7px; }
+.burger::after { top: 7px; }
+.nav-toggle.active > .burger, .menu-btn.active > .burger, .burger.active { background: transparent; }
+.nav-toggle.active > .burger::before, .menu-btn.active > .burger::before, .burger.active::before { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.active > .burger::after, .menu-btn.active > .burger::after, .burger.active::after { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 1080px) {
   .main-nav { position: fixed; top: 0; right: -100%; width: min(360px, 86vw); height: 100vh;
     background: var(--color-primary-dark); padding: 90px 26px 30px; transition: right .45s cubic-bezier(.22,.61,.36,1); z-index: 1200; overflow-y: auto; }
@@ -235,7 +253,9 @@ img { max-width: 100%; }
   .dropdown a { color: #C6CFDD; }
   .nav-toggle { display: grid; place-items: center; }
   .header-actions .btn { display: none; }
-  .nav-overlay { position: fixed; inset: 0; background: rgba(13,27,42,.55); z-index: 1100; opacity: 0; visibility: hidden; transition: var(--trans); }
+  /* z below .site-header (1000) — the drawer lives inside the header's stacking
+     context, so a higher overlay would paint over it and look faded */
+  .nav-overlay { position: fixed; inset: 0; background: rgba(13,27,42,.55); z-index: 999; opacity: 0; visibility: hidden; transition: var(--trans); }
   .nav-overlay.show { opacity: 1; visibility: visible; }
 }
 
@@ -247,8 +267,6 @@ img { max-width: 100%; }
   overflow: hidden; background: var(--color-primary-dark);
 }
 .hero-bg, .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.hero-bg img { animation: slowZoom 16s ease-in-out infinite alternate; }
-@keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.12); } }
 .hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(100deg, rgba(13,27,42,.92) 25%, rgba(13,27,42,.62) 55%, rgba(13,27,42,.25) 100%),
@@ -274,15 +292,6 @@ img { max-width: 100%; }
 .hero-title .gold { color: var(--color-accent); }
 .hero-sub { max-width: 560px; color: #C6CFDD; font-size: 1.12rem; margin-bottom: 30px; }
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
-
-.hero-scroll {
-  position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 4;
-  color: rgba(255,255,255,.8); font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-}
-.hero-scroll .mouse { width: 26px; height: 42px; border: 2px solid rgba(255,255,255,.7); border-radius: 14px; position: relative; }
-.hero-scroll .mouse::after { content: ''; position: absolute; left: 50%; top: 7px; width: 4px; height: 8px; background: var(--color-accent); border-radius: 4px; transform: translateX(-50%); animation: wheel 1.8s infinite; }
-@keyframes wheel { 0% { top: 7px; opacity: 1; } 100% { top: 22px; opacity: 0; } }
 
 /* Hero requirement widget */
 .hero-widget {
@@ -650,7 +659,6 @@ img { max-width: 100%; }
   .hero .grid.grid-2 { grid-template-columns: 1fr; gap: 40px; }
   .hero-content { padding: 46px 0 18px; }
   .hero-widget { max-width: 560px; }
-  .hero-scroll { display: none; }
   .section { padding: 68px 0; }
 }
 @media (max-width: 900px) {
@@ -710,6 +718,13 @@ img { max-width: 100%; }
   .modal { padding: 22px 16px; }
   .contact-map { min-height: 260px; }
   .masonry { columns: 2 140px; }
+
+  /* Why-choose cards stay two-up on phones */
+  .why-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .why-grid .card { padding: 18px 14px; }
+  .why-grid .icon-chip { width: 46px; height: 46px; font-size: 1.05rem; margin-bottom: 12px; border-radius: 14px; }
+  .why-grid .card h3 { font-size: .95rem !important; }
+  .why-grid .card p { font-size: .8rem !important; margin-top: 4px; }
 
   /* General small-screen guards */
   .flex { flex-wrap: wrap; }
