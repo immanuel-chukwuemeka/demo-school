@@ -214,7 +214,9 @@ export default async function results() {
     const { clsStudents, scoresById } = await load();
     const withScores = clsStudents.map((s) => ({ student: s, score: scoresById[s.id]?.data() })).filter((x) => x.score?.subjects && Object.keys(x.score.subjects).length);
     if (!withScores.length) { toast("No scores to compile.", "error"); return; }
-    const { default: jspdf } = await import("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.min.js");
+    let jspdf;
+    try { const { loadJsPDF } = await import("../../lib/pdf.js"); jspdf = await loadJsPDF(); }
+    catch (e) { toast("Couldn't load the PDF engine. Check your connection and try again.", "error", "Download Failed"); return; }
     const doc = new jspdf({ orientation: "landscape", unit: "pt", format: "a4" });
     const W = doc.internal.pageSize.getWidth();
     const subjNames = subjects.filter((s) => withScores[0].score.subjects[s.id]).map((s) => s.name);

@@ -2,9 +2,17 @@
  * PROSPECTUS PDF — generated client-side from Firestore data.
  * ============================================================== */
 import { loadSettings } from "./site.js";
+import { toast } from "./ui.js";
+import { loadJsPDF } from "./pdf.js";
 
 export async function generateProspectusPDF(p) {
-  const { default: jspdf } = await import("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.min.js");
+  let jspdf;
+  try {
+    jspdf = await loadJsPDF();
+  } catch (err) {
+    toast("Couldn't load the PDF engine. Check your connection and try again.", "error", "Download Failed");
+    return;
+  }
   const s = await loadSettings();
   const doc = new jspdf({ orientation: "portrait", unit: "pt", format: "a4" });
   const W = doc.internal.pageSize.getWidth();

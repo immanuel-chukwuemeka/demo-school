@@ -761,3 +761,28 @@ img { max-width: 100%; }
 .gap-lg { gap: 22px; }
 .grow { flex: 1; }
 .hidden { display: none !important; }
+
+/* ==============================================================
+   PRINT — hide every page and reveal only the report/document.
+   Used by the result checker, fee/prospectus tables and dashboards.
+   ============================================================== */
+@media print {
+  body { background: #fff !important; }
+  body * { visibility: hidden !important; }
+  .result-sheet, .result-sheet *,
+  .fee-result.show, .fee-result.show *,
+  .print-area, .print-area * { visibility: visible !important; }
+  .print-actions, .no-print, .site-header, .site-footer, .site-header *, .site-footer *,
+  .page-hero, .back-to-top, .empty-state, .dash-side, .dash-top, .side-backdrop { display: none !important; }
+  .reveal, .reveal.in, .reveal-left, .reveal-left.in, .reveal-right, .reveal-right.in,
+  .reveal-zoom, .reveal-zoom.in, .stagger, .stagger.in, .stagger > *,
+  .hero-widget, .card, .dash-card { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .print-area, .result-sheet, .fee-result.show {
+    position: absolute; left: 0; top: 0; width: 100%; max-width: 100%;
+    box-shadow: none !important; border: none !important; border-radius: 0 !important;
+    max-height: none !important; overflow: visible !important; margin: 0;
+  }
+  .fee-actions { display: none !important; }
+  .result-table-wrap .table-wrap { overflow: visible; }
+  .result-sheet { border: none; }
+}

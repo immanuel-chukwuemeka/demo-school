@@ -2,8 +2,9 @@
  * RESULT SHEET RENDERER + PDF — used by parent checker and
  * student/admin dashboards.
  * ============================================================== */
-import { esc, gradeOf, gradeRemark, fmtDate } from "./ui.js";
+import { esc, gradeOf, gradeRemark, fmtDate, toast } from "./ui.js";
 import { loadSettings } from "./site.js";
+import { loadJsPDF } from "./pdf.js";
 
 export function classGrade(marks, gradeKey) {
   return `<span class="${marks >= 70 ? "grade-A" : marks >= 60 ? "grade-B" : marks >= 50 ? "grade-C" : "grade-D"}">${gradeKey}</span>`;
@@ -20,7 +21,7 @@ export function renderResultSheet(r, s) {
 
   return `
   <div class="result-sheet">
-    <div class="result-head no-print">
+    <div class="result-head">
       <img class="logo" src="assets/logo/logo-white.svg" alt="">
       <div class="rh-center">
         <h2 style="font-size:clamp(1.2rem,2.2vw,1.7rem)">${esc(s.name)}</h2>
@@ -71,7 +72,13 @@ export function renderResultSheet(r, s) {
 }
 
 export async function downloadResultPDF(r) {
-  const { default: jspdf } = await import("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.min.js");
+  let jspdf;
+  try {
+    jspdf = await loadJsPDF();
+  } catch (err) {
+    toast("Couldn't load the PDF engine. Check your connection and try again.", "error", "Download Failed");
+    return;
+  }
   const s = await loadSettings();
   const doc = new jspdf({ orientation: "portrait", unit: "pt", format: "a4" });
   const W = doc.internal.pageSize.getWidth();
@@ -200,5 +207,5 @@ export async function downloadResultPDF(r) {
   doc.setFontSize(8);
   doc.setFont("helvetica", "italic");
   doc.text("This result is computer-generated and verified against the parent scratch-card portal.", W / 2, H - 30, { align: "center" });
-  doc.save(`${r.admission}-${(r.term || "term").toLowerCase()}-${window.__settings?.shortName || "GA"}-result.pdf`);
+  doc.save(`${r.admission}-${(r.term || "term").toLowerCase()}-${s.shortName || "GA"}-result.pdf`);
 }
