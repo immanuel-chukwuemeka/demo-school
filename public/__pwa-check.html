@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA behaviour check</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0D1B2A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Greenwood">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180.png">
+  <link rel="stylesheet" href="css/pwa.css">
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+  <pre id="out" style="white-space:pre-wrap">running…</pre>
+  <script type="module">
+    const out = document.getElementById("out");
+    const lines = [];
+    const say = (k, v) => {
+      lines.push(k + "=" + v);
+      out.textContent = lines.join("\n");
+      new Image().src = "/__report?" + k + "=" + encodeURIComponent(v);
+    };
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    window.onerror = (m) => say("window_error", m);
+    const clear = () => { localStorage.removeItem("GA_PWA_V1"); sessionStorage.clear(); document.querySelector(".pwa-bar")?.remove(); };
+
+    /* ---------------------------------------------------------- 1 */
+    say("viewport", innerWidth + "x" + innerHeight);
+    try {
+      const res = await fetch("manifest.webmanifest");
+      say("manifest_http", res.status);
+      say("manifest_type", res.headers.get("content-type"));
+      const mf = await res.json();
+      say("manifest_name", mf.name);
+      say("manifest_short_name", mf.short_name);
+      say("manifest_display", mf.display);
+      let bad = 0;
+      for (const i of mf.icons) { const r = await fetch(i.src, { method: "HEAD" }); if (!r.ok) bad++; }
+      say("manifest_icons_missing", bad);
+    } catch (e) { say("manifest_error", e.message); }
+
+    /* ---------------------------------------------------------- 2 */
+    try {
+      const reg = await navigator.serviceWorker.register("sw.js", { scope: "./" });
+      say("sw_registered", !!reg);
+      say("sw_scope", new URL(reg.scope).pathname);
+      await navigator.serviceWorker.ready;
+      await wait(3000);
+      const keys = await caches.keys();
+      say("caches", keys.join(","));
+      const shell = await caches.open(keys.find((k) => k.startsWith("ga-shell")) || "missing");
+      const cached = await shell.keys();
+      say("shell_entries", cached.length);
+      const has = (p) => cached.some((r) => new URL(r.url).pathname === p);
+      say("shell_index", has("/index.html"));
+      say("shell_about", has("/about.html"));
+      say("shell_dashboard_admin", has("/dashboard-admin.html"));
+      say("shell_styles", has("/css/styles.css"));
+      say("shell_pwa_js", has("/js/lib/pwa.js"));
+      say("shell_offline_page", has("/offline.html"));
+      say("shell_manifest", has("/manifest.webmanifest"));
+    } catch (e) { say("sw_error", e.message); }
+
+    /* ------------------------------------------------- 3: native flow */
+    try {
+      const { initPWA } = await import("./js/lib/pwa.js");
+      initPWA({ banner: false });
+      await wait(300);
+      const net = document.querySelector(".pwa-net");
+      say("offline_notice_present", !!net);
+      say("offline_notice_not_shown_while_online", !net.classList.contains("show"));
+
+      clear();
+      let prompted = 0;
+      const ev = new Event("beforeinstallprompt");
+      ev.prompt = () => { prompted++; return Promise.resolve(); };
+      ev.userChoice = Promise.resolve({ outcome: "accepted", platform: "web" });
+      window.dispatchEvent(ev);
+      await wait(1400);
+      const bar = document.querySelector(".pwa-bar");
+      say("banner_shown", !!bar);
+      say("banner_first_in_body", bar === document.body.firstElementChild);
+      say("banner_label", bar?.getAttribute("aria-label"));
+      say("banner_title", bar?.querySelector(".pwa-bar-title")?.textContent);
+      say("banner_icon_file", bar?.querySelector(".pwa-bar-icon")?.getAttribute("src")?.split("/").pop());
+      say("banner_install_label", bar?.querySelector("#pwaInstall span")?.textContent);
+      say("banner_close_label", bar?.querySelector("#pwaClose")?.getAttribute("aria-label"));
+      const r = bar.getBoundingClientRect();
+      say("banner_width", Math.round(r.width));
+      say("banner_fits_viewport", r.width <= innerWidth + 1 && document.documentElement.scrollWidth <= innerWidth + 1);
+
+      bar.querySelector("#pwaInstall").click();
+      await wait(400);
+      say("native_prompt_called", prompted === 1);
+      say("banner_hidden_after_accept", !document.querySelector(".pwa-bar"));
+      say("stored_installed", /"installed":true/.test(localStorage.getItem("GA_PWA_V1") || ""));
+
+      /* same session, second event -> stays hidden */
+      clear();
+      window.dispatchEvent(ev);
+      await wait(1400);
+      say("banner_shown_again", !!document.querySelector(".pwa-bar"));
+      window.dispatchEvent(ev);
+      await wait(1400);
+      say("no_repeat_in_session", !!document.querySelector(".pwa-bar"));
+
+      /* explicit dismissal is remembered for 30 days */
+      clear();
+      window.dispatchEvent(ev);
+      await wait(1400);
+      document.querySelector("#pwaClose").click();
+      await wait(300);
+      say("banner_after_close", !document.querySelector(".pwa-bar"));
+      say("stored_dismissed", /"dismissedAt":\d+/.test(localStorage.getItem("GA_PWA_V1") || ""));
+      window.dispatchEvent(ev);
+      await wait(1400);
+      say("not_shown_after_dismissal", !document.querySelector(".pwa-bar"));
+    } catch (e) { say("native_error", e.message); }
+
+    /* ------------------------------------------------------ 4: iOS mode */
+    try {
+      clear();
+      const ua = navigator.userAgent;
+      Object.defineProperty(navigator, "userAgent", {
+        value: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
+        configurable: true
+      });
+      say("ios_ua_swapped", navigator.userAgent !== ua);
+      const mod = await import("./js/lib/pwa.js?ios=1");
+      mod.initPWA();
+      await wait(3200);
+      const iosBar = document.querySelector(".pwa-bar");
+      say("ios_banner_shown", !!iosBar);
+      say("ios_has_no_install_button", !!(iosBar && !iosBar.querySelector("#pwaInstall")));
+      say("ios_instruction", (iosBar?.querySelector(".pwa-bar-msg")?.textContent || "").replace(/\s+/g, " ").trim());
+      say("ios_banner_fits", iosBar ? iosBar.getBoundingClientRect().width <= innerWidth + 1 : false);
+    } catch (e) { say("ios_error", e.message); }
+
+    /* --------------------------------------------- 5: already installed */
+    try {
+      clear();
+      const real = window.matchMedia.bind(window);
+      window.matchMedia = (q) => (q.includes("standalone") || q.includes("fullscreen") || q.includes("minimal-ui"))
+        ? { matches: true, media: q, addEventListener() {}, removeEventListener() {} }
+        : real(q);
+      Object.defineProperty(navigator, "standalone", { value: true, configurable: true });
+      const mod = await import("./js/lib/pwa.js?standalone=1");
+      mod.initPWA();
+      const ev = new Event("beforeinstallprompt");
+      ev.prompt = () => Promise.resolve();
+      ev.userChoice = Promise.resolve({ outcome: "accepted" });
+      window.dispatchEvent(ev);
+      await wait(1600);
+      say("installed_no_banner", !document.querySelector(".pwa-bar"));
+      window.matchMedia = real;
+    } catch (e) { say("standalone_error", e.message); }
+
+    /* ---------------------------------------- 6: keyboard/focus + offline */
+    try {
+      clear();
+      const mod = await import("./js/lib/pwa.js?a11y=1");
+      mod.initPWA();
+      const ev = new Event("beforeinstallprompt");
+      ev.prompt = () => Promise.resolve();
+      ev.userChoice = Promise.resolve({ outcome: "dismissed" });
+      window.dispatchEvent(ev);
+      await wait(1400);
+      const bar = document.querySelector(".pwa-bar");
+      const install = bar?.querySelector("#pwaInstall");
+      const close = bar?.querySelector("#pwaClose");
+      install?.focus();
+      say("install_is_focusable", document.activeElement === install);
+      const ring = getComputedStyle(install).outlineWidth;
+      say("install_has_focus_ring", ring !== "0px");
+      close?.focus();
+      say("close_is_focusable", document.activeElement === close);
+      say("buttons_are_native", install?.tagName === "BUTTON" && close?.tagName === "BUTTON");
+      say("icon_alt_empty", bar?.querySelector(".pwa-bar-icon")?.getAttribute("alt") === "");
+      close.click();
+      await wait(200);
+    } catch (e) { say("a11y_error", e.message); }
+
+    say("DONE", "1");
+  </script>
+</body>
+</html>

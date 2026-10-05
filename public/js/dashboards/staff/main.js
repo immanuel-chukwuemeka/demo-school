@@ -5,9 +5,13 @@
 import { colRef, queryData, doc, getDoc, setDoc, updateDoc, onSnapshot } from "../../lib/db.js";
 import { db } from "../../lib/firebase.js";
 import { guardPage, logout } from "../../lib/auth.js";
+import { initPWA } from "../../lib/pwa.js";
 import { loadSettings } from "../../lib/site.js";
 import { esc, toast, openModal } from "../../lib/ui.js";
 import { classKeyOf } from "../../pages/requirements.js";
+
+/* Offline shell only — the staff portal never nags about installing. */
+initPWA({ banner: false });
 
 const MODULES = [
   { key: "marksheets", label: "Mark Sheets", icon: "fa-table" },

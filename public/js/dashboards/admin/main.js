@@ -2,6 +2,7 @@
  * ADMIN BOOTSTRAP — registers all admin views with the shell.
  * ============================================================== */
 import { bootShell } from "./shell.js";
+import { initPWA } from "../../lib/pwa.js";
 import dashboard from "./dashboard.js";
 import students from "./students.js";
 import staff from "./staff.js";
@@ -17,5 +18,8 @@ const views = {
   fees, requirements, prospectus, results, scratchcards,
   announcements, gallery, news, settings
 };
+
+/* Offline shell only — the admin control room never nags about installing. */
+initPWA({ banner: false });
 
 bootShell(views);

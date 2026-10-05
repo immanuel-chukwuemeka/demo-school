@@ -7,8 +7,12 @@
 import { mountShell } from "./lib/shell.js";
 import { bootAnimations, initReveal } from "./lib/anim.js";
 import { loadSettings, settingsSync } from "./lib/site.js";
+import { initPWA } from "./lib/pwa.js";
 
 const TOKEN_RE = /\{([a-zA-Z]+)\}/g;
+
+/* Service worker + "Install app" prompt (no-op where unsupported). */
+initPWA();
 
 function tokenMap(s) {
   return {

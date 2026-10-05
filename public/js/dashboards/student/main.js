@@ -5,8 +5,12 @@
 import { colRef, queryData, doc, getDoc } from "../../lib/db.js";
 import { db } from "../../lib/firebase.js";
 import { guardPage, logout, profileOf } from "../../lib/auth.js";
+import { initPWA } from "../../lib/pwa.js";
 import { loadSettings, naira } from "../../lib/site.js";
 import { esc, toast, openModal, fmtDate } from "../../lib/ui.js";
+
+/* Offline shell only — the student portal never nags about installing. */
+initPWA({ banner: false });
 
 const MODULES = [
   { key: "overview", label: "Overview", icon: "fa-house" },

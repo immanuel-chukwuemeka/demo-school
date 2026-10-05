@@ -4,8 +4,12 @@
 import { signIn, ROLES, onAuth, resolveRole } from "../lib/auth.js";
 import { toast } from "../lib/ui.js";
 import { loadSettings } from "../lib/site.js";
+import { initPWA } from "../lib/pwa.js";
 import { auth } from "../lib/firebase.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+/* Offline shell on the portal pages; no install banner (two-column layout). */
+initPWA({ banner: false });
 
 const roleBtns = document.querySelectorAll(".role-card");
 let role = new URLSearchParams(location.search).get("role") || "admin";

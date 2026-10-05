@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>You are offline — Greenwood Academy International</title>
+  <meta name="description" content="You are offline. Reconnect to the internet to continue.">
+  <meta name="theme-color" content="#0D1B2A">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <style>
+    /* Self-contained on purpose: this page has to render with no network
+       and without the site's stylesheet, so the brand tokens are repeated here. */
+    :root {
+      --navy: #0D1B2A; --navy-2: #16304F; --accent: #FF6B00; --accent-dark: #E65100;
+      --gold: #F5C542; --muted: #64748B; --border: #E2E8F0; --radius: 16px;
+      --display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+      --body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh; min-height: 100dvh; display: grid; place-items: center;
+      padding: 28px 18px; font-family: var(--body); color: #1E293B; line-height: 1.6;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 58%, #1F4A7A 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+    .card {
+      width: min(560px, 100%); background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--border); padding: 40px 34px; text-align: center;
+      box-shadow: 0 26px 60px rgba(0, 0, 0, .28);
+    }
+    .logo { width: 92px; height: 92px; margin: 0 auto 18px; display: block; }
+    .kicker {
+      display: inline-block; font-family: var(--display); font-size: .74rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    h1 { font-family: var(--display); font-size: clamp(1.5rem, 5vw, 2rem); color: var(--navy); line-height: 1.2; }
+    p { color: var(--muted); margin: 12px 0 0; font-size: .98rem; }
+    .note {
+      margin-top: 22px; padding: 14px 16px; border-radius: 12px; text-align: left;
+      background: #FFF7ED; border: 1px solid #FED7AA; color: #7C2D12; font-size: .88rem;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 999px;
+      font-size: .9rem; font-weight: 700; text-decoration: none;
+      border: 2px solid transparent; cursor: pointer;
+      font-family: var(--display);
+      transition: transform .25s cubic-bezier(.22,.61,.36,1), box-shadow .25s, background .25s;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #fff; box-shadow: 0 12px 26px rgba(255,107,0,.32); }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost { background: #fff; border-color: var(--border); color: var(--navy); }
+    .btn-ghost:hover { background: #F1F5F9; transform: translateY(-2px); }
+    .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .links { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--border); }
+    .links p { font-size: .8rem; margin: 0 0 10px; }
+    .links a { display: inline-block; margin: 4px 8px; color: var(--navy); font-weight: 600; font-size: .88rem; text-underline-offset: 3px; }
+    .links a:hover { color: var(--accent); }
+    .links a:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+    footer { margin-top: 22px; font-size: .76rem; color: rgba(255,255,255,.72); text-align: center; }
+    @media (max-width: 420px) { .card { padding: 30px 20px; } .actions .btn { width: 100%; justify-content: center; } }
+    @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img class="logo" src="assets/logo/logo.svg" alt="Greenwood Academy International" width="92" height="92">
+    <span class="kicker">Connection lost</span>
+    <h1 id="offlineTitle">You are offline</h1>
+    <p id="offlineMsg">Please reconnect to the internet and try again.</p>
+
+    <div class="note" id="offlineNote" hidden>
+      Portals, results and live school data need a connection — they cannot be shown from a saved copy.
+      Never enter a password or scratch-card PIN on an offline page you did not open yourself.
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" type="button" id="retryBtn">
+        <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8Z"/></svg>
+        <span>Try again</span>
+      </button>
+      <a class="btn btn-ghost" href="index.html">Go to homepage</a>
+    </div>
+
+    <div class="links">
+      <p>Saved pages that still work offline</p>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="admissions.html">Admissions</a>
+      <a href="requirements.html">Requirements</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </main>
+
+  <footer>Greenwood Academy International · Knowledge · Character · Excellence</footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("retryBtn");
+      btn.addEventListener("click", function () { location.replace(location.href); });
+
+      function sync() {
+        if (navigator.onLine) {
+          document.getElementById("offlineMsg").textContent =
+            "You are back online — reloading the page.";
+          window.setTimeout(function () { location.replace(location.href); }, 900);
+        }
+      }
+      window.addEventListener("online", sync);
+
+      /* Portals are useless without the network — say so plainly instead of
+         pretending a signed-in screen can work from cache. */
+      var from = new URLSearchParams(location.search).get("from") || "";
+      if (/dashboard|login|check-result/i.test(from)) {
+        document.getElementById("offlineTitle").textContent = "This page needs a connection";
+        document.getElementById("offlineNote").hidden = false;
+      }
+      sync();
+    })();
+  </script>
+</body>
+</html>
